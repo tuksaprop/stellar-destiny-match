@@ -1,11 +1,17 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    // Redirect to the HTML version
+    window.location.href = '/index.html';
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen flex items-center justify-center bg-cosmic-blue text-white">
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+        <div className="animate-spin w-16 h-16 border-4 border-cosmic-magenta border-t-transparent rounded-full mx-auto mb-4"></div>
+        <p className="text-xl">Redirigiendo a AlmaEstelar...</p>
       </div>
     </div>
   );

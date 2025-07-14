@@ -1,24 +1,712 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>stellar-destiny-match</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaEstelar - Tu alma gemela está escrita en las estrellas</title>
+    <meta name="description" content="Encuentra tu alma gemela a través de la astrología y la sinastría cósmica" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'cosmic-blue': '#0f1035',
+                        'deep-indigo': '#1a1b4b',
+                        'star-gold': '#ffd700',
+                        'cosmic-magenta': '#d946ef',
+                        'cosmic-purple': '#8b5cf6',
+                        'soft-white': '#f8fafc',
+                    },
+                    backgroundImage: {
+                        'cosmic': 'radial-gradient(ellipse at center, #1a1b4b 0%, #0f1035 50%, #000000 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(26, 27, 75, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stars {
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #ffd700, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffd700, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.8), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 8s linear infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #ffd700, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-cosmic {
+            background: linear-gradient(135deg, #d946ef, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cosmic:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(217, 70, 239, 0.3);
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-cosmic-blue text-white overflow-x-hidden">
+    <!-- Background Stars -->
+    <div class="fixed inset-0 stars pointer-events-none"></div>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative px-4">
+        <div class="text-center max-w-4xl mx-auto fade-in">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text">
+                Tu alma gemela está escrita en las estrellas
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                El universo ha conspirado para este momento. Conecta con tu destino cósmico a través de tu carta natal única y nuestro algoritmo de sinastría avanzado.
+            </p>
+            <button onclick="scrollToSection('proceso')" class="btn-cosmic text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg">
+                ✨ Descubre mi alma gemela ✨
+            </button>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 floating">
+            <div class="text-2xl">⭐</div>
+        </div>
+    </section>
 
-    <meta property="og:title" content="stellar-destiny-match" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- Tu Viaje Cósmico Section -->
+    <section id="proceso" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 gradient-text">Tu Viaje Cósmico</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Esta sección interactiva demuestra cómo transformamos tus datos natales en una conexión real. 
+                    Sigue los pasos para ver cómo funciona nuestro análisis de compatibilidad.
+                </p>
+            </div>
+            
+            <div class="glass-dark rounded-3xl p-8">
+                <!-- Tabs Navigation -->
+                <div class="flex flex-wrap justify-center mb-8 border-b border-white/20">
+                    <button onclick="showTab(1)" id="tab1" class="tab-btn px-6 py-3 mx-2 mb-4 rounded-t-lg transition-all duration-300 active">
+                        1. Ingresa tus Datos
+                    </button>
+                    <button onclick="showTab(2)" id="tab2" class="tab-btn px-6 py-3 mx-2 mb-4 rounded-t-lg transition-all duration-300">
+                        2. Compatibilidad
+                    </button>
+                    <button onclick="showTab(3)" id="tab3" class="tab-btn px-6 py-3 mx-2 mb-4 rounded-t-lg transition-all duration-300">
+                        3. Conexión Cósmica
+                    </button>
+                </div>
+                
+                <!-- Tab Content 1 -->
+                <div id="content1" class="tab-content">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">📅 Tu Huella Cósmica</h3>
+                        <p class="text-gray-300 max-w-2xl mx-auto">
+                            Para revelar tu carta natal única, necesitamos tus datos de nacimiento. Esta información es la clave para 
+                            desbloquear un análisis de compatibilidad profundo y preciso. Es el primer paso para encontrar tu conexión predestinada.
+                        </p>
+                    </div>
+                    
+                    <div class="max-w-md mx-auto glass rounded-2xl p-6">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Nombre</label>
+                            <input type="text" value="Alex" readonly class="w-full p-3 bg-white/10 rounded-lg border border-white/20">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Fecha, Hora y Lugar de Nacimiento</label>
+                            <input type="text" value="15 de Abril, 1995, 04:30 AM, Madrid" readonly class="w-full p-3 bg-white/10 rounded-lg border border-white/20">
+                        </div>
+                        <button onclick="showLoading()" class="w-full btn-cosmic text-white py-3 rounded-lg font-semibold">
+                            Calcular mi Carta Natal
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Tab Content 2 -->
+                <div id="content2" class="tab-content hidden">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">💫 Análisis de Compatibilidad</h3>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Profile Selector -->
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">Selecciona un perfil:</h4>
+                            <div class="space-y-3">
+                                <div onclick="selectProfile('Luna', 28, 'Piscis')" class="profile-card glass rounded-xl p-4 cursor-pointer hover:bg-white/20 transition-all duration-300">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-cosmic-magenta to-cosmic-purple rounded-full flex items-center justify-center mr-4">
+                                            🌙
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Luna</div>
+                                            <div class="text-sm text-gray-300">28 años • Piscis ♓</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div onclick="selectProfile('Julieta', 25, 'Leo')" class="profile-card glass rounded-xl p-4 cursor-pointer hover:bg-white/20 transition-all duration-300">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-star-gold to-yellow-500 rounded-full flex items-center justify-center mr-4">
+                                            🦁
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Julieta</div>
+                                            <div class="text-sm text-gray-300">25 años • Leo ♌</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div onclick="selectProfile('Verónica', 30, 'Escorpio')" class="profile-card glass rounded-xl p-4 cursor-pointer hover:bg-white/20 transition-all duration-300">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
+                                            🦂
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Verónica</div>
+                                            <div class="text-sm text-gray-300">30 años • Escorpio ♏</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div onclick="selectProfile('Gonzalo', 32, 'Tauro')" class="profile-card glass rounded-xl p-4 cursor-pointer hover:bg-white/20 transition-all duration-300">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mr-4">
+                                            🐂
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Gonzalo</div>
+                                            <div class="text-sm text-gray-300">32 años • Tauro ♉</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Compatibility Chart -->
+                        <div>
+                            <h4 id="chartTitle" class="text-xl font-semibold mb-4">Análisis de Compatibilidad</h4>
+                            <div class="glass rounded-xl p-4">
+                                <canvas id="compatibilityChart" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Content 3 -->
+                <div id="content3" class="tab-content hidden">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">💖 ¡Conexión Cósmica Encontrada!</h3>
+                    </div>
+                    
+                    <div id="cosmicConnection" class="max-w-2xl mx-auto">
+                        <div class="glass rounded-2xl p-8 text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-cosmic-magenta to-cosmic-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-3xl">🌙</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">Luna</h4>
+                            <p class="text-gray-300 mb-6">28 años • Piscis ♓</p>
+                            
+                            <div class="text-left mb-6">
+                                <p class="mb-4">
+                                    Tu conexión con Luna trasciende lo físico. Vuestras cartas natales revelan una sinastría extraordinaria 
+                                    donde la Luna de Luna armoniza perfectamente con tu Sol en Aries, creando un equilibrio entre pasión y emoción.
+                                </p>
+                                <p class="mb-4">
+                                    Venus en aspecto favorable sugiere una atracción magnética y duradera, mientras que vuestros Mercurios 
+                                    en signos complementarios prometen conversaciones que fluyen naturalmente.
+                                </p>
+                            </div>
+                            
+                            <div class="text-left mb-6">
+                                <h5 class="text-lg font-semibold mb-3">💬 Iniciadores de conversación:</h5>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Pregúntale a Luna sobre su conexión con el agua y la naturaleza</li>
+                                    <li>• Vuestros nodos lunares sugieren un vínculo kármico profundo</li>
+                                    <li>• Comparte tu pasión por nuevos proyectos, ella valorará tu iniciativa</li>
+                                </ul>
+                            </div>
+                            
+                            <button class="w-full btn-cosmic text-white py-3 rounded-lg font-semibold">
+                                Enviar un Mensaje a Luna
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+    <!-- Los Pilares de la Conexión -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 gradient-text">Los Pilares de la Conexión</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Nuestra plataforma va más allá del signo solar. Analizamos los componentes clave de tu carta natal 
+                    para revelar la verdadera dinámica de una relación. Haz clic en cada pilar para saber más.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="openModal('signo-solar')" class="glass rounded-2xl p-6 cursor-pointer hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                    <div class="text-4xl mb-4 text-center">☀️</div>
+                    <h3 class="text-xl font-bold mb-2 text-center">Signo Solar</h3>
+                    <p class="text-gray-300 text-center">Tu esencia y personalidad central</p>
+                </div>
+                
+                <div onclick="openModal('signo-lunar')" class="glass rounded-2xl p-6 cursor-pointer hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                    <div class="text-4xl mb-4 text-center">🌙</div>
+                    <h3 class="text-xl font-bold mb-2 text-center">Signo Lunar</h3>
+                    <p class="text-gray-300 text-center">Tus emociones y mundo interior</p>
+                </div>
+                
+                <div onclick="openModal('venus-marte')" class="glass rounded-2xl p-6 cursor-pointer hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                    <div class="text-4xl mb-4 text-center">💖</div>
+                    <h3 class="text-xl font-bold mb-2 text-center">Venus y Marte</h3>
+                    <p class="text-gray-300 text-center">Amor, atracción y pasión</p>
+                </div>
+                
+                <div onclick="openModal('casas-aspectos')" class="glass rounded-2xl p-6 cursor-pointer hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                    <div class="text-4xl mb-4 text-center">🏠</div>
+                    <h3 class="text-xl font-bold mb-2 text-center">Casas y Aspectos</h3>
+                    <p class="text-gray-300 text-center">Dinámicas y potencial relacional</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Testimonios -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 gradient-text">Miles ya encontraron su destino cósmico</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cosmic-magenta to-cosmic-purple rounded-full flex items-center justify-center mr-4">
+                            M
+                        </div>
+                        <div>
+                            <div class="font-semibold">Marcos</div>
+                            <div class="text-sm text-gray-300">34 años</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "Nunca creí en la astrología hasta que conocí a Ana a través de AlmaEstelar. 
+                        Nuestras cartas natales eran increíblemente compatibles y ahora llevamos 2 años juntos. 
+                        El universo realmente conspira."
+                    </p>
+                </div>
+                
+                <div class="glass rounded-2xl p-6 scale-105 border-2 border-cosmic-magenta">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-star-gold to-yellow-500 rounded-full flex items-center justify-center mr-4">
+                            C
+                        </div>
+                        <div>
+                            <div class="font-semibold">Carmen</div>
+                            <div class="text-sm text-gray-300">28 años</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "La precisión del análisis de compatibilidad me dejó sin palabras. 
+                        Conocí a mi alma gemela en la primera semana. La sinastría era tan acertada 
+                        que parecía que nos conocíamos de toda la vida."
+                    </p>
+                </div>
+                
+                <div class="glass rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mr-4">
+                            D
+                        </div>
+                        <div>
+                            <div class="font-semibold">David</div>
+                            <div class="text-sm text-gray-300">31 años</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "Después de tantas aplicaciones de citas fallidas, AlmaEstelar fue una revelación. 
+                        El enfoque astrológico me conectó con personas realmente afines. 
+                        ¡Ya planeamos nuestra boda bajo la luna llena!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 px-4 border-t border-white/20">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">¿Listo para alinear tus estrellas?</h2>
+            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Únete a nuestra comunidad y comienza tu viaje para encontrar una conexión que estaba destinada a ser.
+            </p>
+            <button class="btn-cosmic text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg mb-12">
+                ✨ Crear mi perfil cósmico ✨
+            </button>
+            
+            <div class="flex flex-wrap justify-center gap-6 mb-8 text-gray-400">
+                <a href="#" class="hover:text-white transition-colors">Términos y condiciones</a>
+                <a href="#" class="hover:text-white transition-colors">Política de privacidad</a>
+                <a href="#" class="hover:text-white transition-colors">Contacto</a>
+            </div>
+            
+            <p class="text-gray-500">© 2025 AlmaEstelar. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+        <div class="glass rounded-2xl p-8 text-center max-w-md mx-4">
+            <div class="animate-spin w-16 h-16 border-4 border-cosmic-magenta border-t-transparent rounded-full mx-auto mb-4"></div>
+            <h3 class="text-xl font-bold mb-2">Calculando tu carta natal...</h3>
+            <p class="text-gray-300 mb-4">Analizando las posiciones planetarias y buscando compatibilidades cósmicas</p>
+            <div class="text-2xl">🌟</div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+        <div class="glass rounded-2xl p-8 max-w-2xl mx-4 max-h-96 overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+                <button onclick="closeModal()" class="text-2xl hover:text-cosmic-magenta transition-colors">&times;</button>
+            </div>
+            <div id="modalContent" class="text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        function showTab(tabNumber) {
+            // Hide all tab contents
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById(`content${i}`).classList.add('hidden');
+                document.getElementById(`tab${i}`).classList.remove('active');
+            }
+            
+            // Show selected tab
+            document.getElementById(`content${tabNumber}`).classList.remove('hidden');
+            document.getElementById(`tab${tabNumber}`).classList.add('active');
+        }
+
+        // Smooth scroll
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Loading functionality
+        function showLoading() {
+            document.getElementById('loadingModal').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('loadingModal').classList.add('hidden');
+                showTab(2);
+            }, 3000);
+        }
+
+        // Profile selection and chart
+        let compatibilityChart;
+        const profileData = {
+            'Luna': {
+                'Armonía Emocional': 95,
+                'Estímulo Intelectual': 78,
+                'Química Física': 88,
+                'Flujo de Comunicación': 92,
+                'Potencial a Largo Plazo': 90
+            },
+            'Julieta': {
+                'Armonía Emocional': 72,
+                'Estímulo Intelectual': 85,
+                'Química Física': 93,
+                'Flujo de Comunicación': 68,
+                'Potencial a Largo Plazo': 75
+            },
+            'Verónica': {
+                'Armonía Emocional': 83,
+                'Estímulo Intelectual': 91,
+                'Química Física': 79,
+                'Flujo de Comunicación': 87,
+                'Potencial a Largo Plazo': 85
+            },
+            'Gonzalo': {
+                'Armonía Emocional': 68,
+                'Estímulo Intelectual': 73,
+                'Química Física': 71,
+                'Flujo de Comunicación': 79,
+                'Potencial a Largo Plazo': 82
+            }
+        };
+
+        function selectProfile(name, age, sign) {
+            // Update chart title
+            document.getElementById('chartTitle').textContent = `Análisis de Compatibilidad con ${name}`;
+            
+            // Update cosmic connection section
+            const connectionSection = document.getElementById('cosmicConnection');
+            const emoji = name === 'Luna' ? '🌙' : name === 'Julieta' ? '🦁' : name === 'Verónica' ? '🦂' : '🐂';
+            const signSymbol = name === 'Luna' ? '♓' : name === 'Julieta' ? '♌' : name === 'Verónica' ? '♏' : '♉';
+            
+            connectionSection.innerHTML = `
+                <div class="glass rounded-2xl p-8 text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-cosmic-magenta to-cosmic-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">${emoji}</span>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-2">${name}</h4>
+                    <p class="text-gray-300 mb-6">${age} años • ${sign} ${signSymbol}</p>
+                    
+                    <div class="text-left mb-6">
+                        <p class="mb-4">
+                            Tu conexión con ${name} trasciende lo físico. Vuestras cartas natales revelan una sinastría extraordinaria 
+                            donde elementos complementarios crean un equilibrio perfecto entre pasión y comprensión mutua.
+                        </p>
+                        <p class="mb-4">
+                            Los aspectos planetarios sugieren una atracción magnética y duradera, mientras que vuestros elementos 
+                            astrológicos prometen una relación que evoluciona y se fortalece con el tiempo.
+                        </p>
+                    </div>
+                    
+                    <div class="text-left mb-6">
+                        <h5 class="text-lg font-semibold mb-3">💬 Iniciadores de conversación:</h5>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• Pregúntale a ${name} sobre sus pasiones y sueños</li>
+                            <li>• Vuestros nodos lunares sugieren un vínculo kármico profundo</li>
+                            <li>• Comparte tus experiencias, vuestra sinastría favorece la comunicación abierta</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="w-full btn-cosmic text-white py-3 rounded-lg font-semibold">
+                        Enviar un Mensaje a ${name}
+                    </button>
+                </div>
+            `;
+            
+            // Update chart
+            updateCompatibilityChart(name);
+            
+            // Highlight selected profile
+            document.querySelectorAll('.profile-card').forEach(card => {
+                card.classList.remove('bg-white/20');
+            });
+            event.currentTarget.classList.add('bg-white/20');
+        }
+
+        function updateCompatibilityChart(profileName) {
+            const ctx = document.getElementById('compatibilityChart').getContext('2d');
+            const data = profileData[profileName];
+            
+            if (compatibilityChart) {
+                compatibilityChart.destroy();
+            }
+            
+            compatibilityChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        label: 'Compatibilidad %',
+                        data: Object.values(data),
+                        backgroundColor: 'rgba(217, 70, 239, 0.8)',
+                        borderColor: 'rgba(217, 70, 239, 1)',
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.8)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                maxRotation: 45
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Modal functionality
+        const modalContent = {
+            'signo-solar': {
+                title: '☀️ Signo Solar',
+                content: `
+                    <p class="mb-4">Tu signo solar representa tu esencia básica, tu ego y tu personalidad central. Es la energía que irradias y cómo te ves a ti mismo.</p>
+                    <p class="mb-4">En las relaciones, la compatibilidad de signos solares indica:</p>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li>Armonía en valores fundamentales</li>
+                        <li>Comprensión mutua de objetivos de vida</li>
+                        <li>Facilidad de comunicación básica</li>
+                        <li>Respeto por la individualidad del otro</li>
+                    </ul>
+                    <p>Analizamos no solo la compatibilidad directa, sino también los elementos (fuego, tierra, aire, agua) y las modalidades (cardinal, fijo, mutable) para una comprensión más profunda de vuestra dinámica.</p>
+                `
+            },
+            'signo-lunar': {
+                title: '🌙 Signo Lunar',
+                content: `
+                    <p class="mb-4">Tu signo lunar gobierna tus emociones, instintos y reacciones subconscientes. Es tu mundo interior y cómo procesas los sentimientos.</p>
+                    <p class="mb-4">La compatibilidad lunar es crucial para:</p>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li>Intimidad emocional genuina</li>
+                        <li>Comprensión de necesidades afectivas</li>
+                        <li>Armonía en el hogar y la vida privada</li>
+                        <li>Apoyo mutuo en momentos difíciles</li>
+                    </ul>
+                    <p>Estudiamos los aspectos entre vuestras Lunas, así como cómo cada Luna interactúa con el Sol del otro, creando un mapa emocional de la relación.</p>
+                `
+            },
+            'venus-marte': {
+                title: '💖 Venus y Marte',
+                content: `
+                    <p class="mb-4">Venus rige el amor, la belleza y la atracción, mientras que Marte gobierna la pasión, el deseo y la energía sexual.</p>
+                    <p class="mb-4">La sinastría Venus-Marte revela:</p>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li>Química física y atracción magnética</li>
+                        <li>Estilos de expresión romántica</li>
+                        <li>Compatibilidad en la intimidad</li>
+                        <li>Equilibrio entre dar y recibir amor</li>
+                    </ul>
+                    <p>Examinamos los aspectos entre tu Venus y su Marte, y viceversa, además de las casas donde caen estos planetas en la carta de cada uno, para determinar la dinámica romántica y sexual de la pareja.</p>
+                `
+            },
+            'casas-aspectos': {
+                title: '🏠 Casas y Aspectos',
+                content: `
+                    <p class="mb-4">Las casas astrológicas muestran las áreas de la vida donde se manifiestan las energías planetarias, mientras que los aspectos revelan cómo interactúan estas energías entre las dos cartas.</p>
+                    <p class="mb-4">Analizamos específicamente:</p>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li><strong>Casa 7:</strong> Cómo cada uno ve al otro como pareja</li>
+                        <li><strong>Casa 5:</strong> Romance, diversión y creatividad compartida</li>
+                        <li><strong>Casa 8:</strong> Intimidad profunda y transformación mutua</li>
+                        <li><strong>Casa 4:</strong> Vida doméstica y planes familiares</li>
+                    </ul>
+                    <p>Los aspectos (conjunción, trígono, sextil, cuadratura, oposición) nos dicen si las energías fluyen armoniosamente o crean tensión constructiva que puede fortalecer la relación.</p>
+                `
+            }
+        };
+
+        function openModal(type) {
+            const modal = document.getElementById('infoModal');
+            const content = modalContent[type];
+            
+            document.getElementById('modalTitle').textContent = content.title;
+            document.getElementById('modalContent').innerHTML = content.content;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').classList.add('hidden');
+        }
+
+        // Initialize default chart
+        document.addEventListener('DOMContentLoaded', function() {
+            selectProfile('Luna', 28, 'Piscis');
+        });
+
+        // Tab styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .tab-btn {
+                color: rgba(255, 255, 255, 0.6);
+                border-bottom: 2px solid transparent;
+            }
+            .tab-btn.active {
+                color: #d946ef;
+                border-bottom-color: #d946ef;
+                background: rgba(217, 70, 239, 0.1);
+            }
+            .tab-btn:hover {
+                color: rgba(255, 255, 255, 0.9);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
 </html>
