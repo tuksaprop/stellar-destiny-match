@@ -6,9 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Onboarding = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     gender: "",
@@ -22,21 +26,74 @@ const Onboarding = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validar que todos los campos estén completos
     const requiredFields = Object.values(formData);
     if (requiredFields.some(field => !field.trim())) {
-      alert("Por favor, completa todos los campos");
+      toast({
+        title: "Campos incompletos",
+        description: "Por favor, completa todos los campos",
+        variant: "destructive"
+      });
       return;
     }
 
-    // Guardar datos en localStorage para simular persistencia
-    localStorage.setItem("userOnboardingData", JSON.stringify(formData));
-    
-    // Navegar a la página de loading
-    navigate("/loading");
+    setLoading(true);
+
+    try {
+      // Obtener el usuario actual
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast({
+          title: "Error de autenticación",
+          description: "Debes iniciar sesión primero",
+          variant: "destructive"
+        });
+        navigate("/auth");
+        return;
+      }
+
+      // Guardar datos en Supabase
+      const { error } = await supabase
+        .from('user_profiles')
+        .upsert({
+          user_id: user.id,
+          full_name: formData.fullName,
+          gender: formData.gender,
+          birth_date: formData.birthDate,
+          birth_time: formData.birthTime,
+          birth_place: formData.birthPlace,
+          looking_for: formData.lookingFor
+        });
+
+      if (error) {
+        console.error('Error saving profile:', error);
+        toast({
+          title: "Error",
+          description: "No se pudo guardar tu perfil. Inténtalo de nuevo.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Guardar también en localStorage para el loading
+      localStorage.setItem("userOnboardingData", JSON.stringify(formData));
+      
+      // Navegar a la página de loading
+      navigate("/loading");
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error inesperado",
+        description: "Ocurrió un error. Inténtalo de nuevo.",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -178,9 +235,10 @@ const Onboarding = () => {
               <div className="pt-6">
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-cosmic-magenta to-purple-600 hover:from-cosmic-magenta/80 hover:to-purple-600/80 text-white py-3 text-lg rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
+                  disabled={loading}
+                  className="w-full bg-gradient-to-r from-cosmic-magenta to-purple-600 hover:from-cosmic-magenta/80 hover:to-purple-600/80 text-white py-3 text-lg rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  🔮 Calcular mi Carta Natal
+                  {loading ? "Guardando..." : "🔮 Calcular mi Carta Natal"}
                 </Button>
               </div>
             </form>
@@ -193,6 +251,7 @@ const Onboarding = () => {
             variant="ghost"
             onClick={() => navigate("/")}
             className="text-gray-400 hover:text-white"
+            disabled={loading}
           >
             ← Volver al inicio
           </Button>
