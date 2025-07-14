@@ -1,21 +1,11 @@
 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const Landing = () => {
   const navigate = useNavigate();
-  const [selectedProfile, setSelectedProfile] = useState("Luna");
-
-  const profiles = [
-    { name: "Luna", age: 28, sign: "Piscis", compatibility: [85, 75, 90, 80, 88] },
-    { name: "Julieta", age: 25, sign: "Cáncer", compatibility: [78, 82, 85, 75, 83] },
-    { name: "Verónica", age: 30, sign: "Escorpio", compatibility: [90, 88, 85, 92, 89] },
-    { name: "Gonzalo", age: 32, sign: "Tauro", compatibility: [82, 79, 88, 85, 84] }
-  ];
 
   const pillars = [
     {
@@ -65,9 +55,6 @@ const Landing = () => {
     }
   ];
 
-  const currentProfile = profiles.find(p => p.name === selectedProfile) || profiles[0];
-  const compatibilityLabels = ['Armonía Emocional', 'Estímulo Intelectual', 'Química Física', 'Flujo de Comunicación', 'Potencial a Largo Plazo'];
-
   return (
     <div className="min-h-screen bg-cosmic-blue text-white overflow-x-hidden">
       {/* Hero Section */}
@@ -86,152 +73,6 @@ const Landing = () => {
           >
             ✨ Descubre mi alma gemela ✨
           </Button>
-        </div>
-      </section>
-
-      {/* Tu Viaje Cósmico Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-cosmic-gold">Tu Viaje Cósmico</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Esta sección interactiva demuestra cómo transformamos tus datos natales en una conexión real. 
-              Sigue los pasos para ver cómo funciona nuestro análisis de compatibilidad.
-            </p>
-          </div>
-
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 shadow-2xl">
-            <CardContent className="p-8">
-              <Tabs defaultValue="datos" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 mb-8 bg-white/5">
-                  <TabsTrigger value="datos" className="text-white data-[state=active]:bg-cosmic-magenta">
-                    1. Ingresa tus Datos
-                  </TabsTrigger>
-                  <TabsTrigger value="compatibilidad" className="text-white data-[state=active]:bg-cosmic-magenta">
-                    2. Compatibilidad
-                  </TabsTrigger>
-                  <TabsTrigger value="conexion" className="text-white data-[state=active]:bg-cosmic-magenta">
-                    3. Conexión Cósmica
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="datos" className="space-y-6">
-                  <h3 className="text-2xl font-semibold text-cosmic-gold mb-4">📅 Tu Huella Cósmica</h3>
-                  <p className="text-gray-300 mb-6">
-                    Para revelar tu carta natal única, necesitamos tus datos de nacimiento. Esta información es la clave 
-                    para desbloquear un análisis de compatibilidad profundo y preciso. En esta demostración, usaremos datos de ejemplo.
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-4 mb-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Nombre</label>
-                      <input
-                        type="text"
-                        value="Alex"
-                        readOnly
-                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Fecha, Hora y Lugar de Nacimiento</label>
-                      <input
-                        type="text"
-                        value="15 de Abril, 1995, 04:30 AM, Madrid"
-                        readOnly
-                        className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
-                      />
-                    </div>
-                  </div>
-                  <Button className="bg-cosmic-magenta hover:bg-cosmic-magenta/80 text-white">
-                    Calcular mi Carta Natal
-                  </Button>
-                </TabsContent>
-
-                <TabsContent value="compatibilidad" className="space-y-6">
-                  <h3 className="text-2xl font-semibold text-cosmic-gold mb-4">
-                    Análisis de Compatibilidad con {currentProfile.name}
-                  </h3>
-                  
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-medium">Selecciona un perfil:</h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        {profiles.map((profile) => (
-                          <Button
-                            key={profile.name}
-                            variant={selectedProfile === profile.name ? "default" : "outline"}
-                            onClick={() => setSelectedProfile(profile.name)}
-                            className={`p-4 text-center ${
-                              selectedProfile === profile.name 
-                                ? "bg-cosmic-magenta text-white" 
-                                : "bg-white/10 text-white border-white/20 hover:bg-white/20"
-                            }`}
-                          >
-                            <div>
-                              <div className="font-semibold">{profile.name}</div>
-                              <div className="text-sm opacity-75">{profile.age} años, {profile.sign}</div>
-                            </div>
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-medium">Compatibilidad:</h4>
-                      <div className="space-y-3">
-                        {compatibilityLabels.map((label, index) => (
-                          <div key={label} className="space-y-1">
-                            <div className="flex justify-between text-sm">
-                              <span>{label}</span>
-                              <span>{currentProfile.compatibility[index]}%</span>
-                            </div>
-                            <div className="w-full bg-white/20 rounded-full h-2">
-                              <div
-                                className="bg-gradient-to-r from-cosmic-magenta to-cosmic-gold h-2 rounded-full transition-all duration-500"
-                                style={{ width: `${currentProfile.compatibility[index]}%` }}
-                              ></div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="conexion" className="space-y-6">
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-semibold text-cosmic-gold mb-4">💖 ¡Conexión Cósmica Encontrada!</h3>
-                    <div className="bg-white/5 rounded-lg p-6 mb-6">
-                      <div className="w-20 h-20 bg-gradient-to-r from-cosmic-magenta to-cosmic-gold rounded-full mx-auto mb-4 flex items-center justify-center text-2xl">
-                        {currentProfile.name[0]}
-                      </div>
-                      <h4 className="text-xl font-semibold">{currentProfile.name}</h4>
-                      <p className="text-cosmic-gold">{currentProfile.age} años • {currentProfile.sign}</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <p className="text-gray-300">
-                      Tu conexión con {currentProfile.name} muestra una armonía excepcional. Vuestra Luna en aspectos favorables 
-                      indica una profunda comprensión emocional, mientras que Venus sugiere una atracción magnética natural.
-                    </p>
-                    
-                    <div>
-                      <h5 className="font-semibold mb-3 text-cosmic-gold">Iniciadores de conversación:</h5>
-                      <ul className="space-y-2 text-gray-300">
-                        <li>• Pregúntale a {currentProfile.name} sobre su pasión por el arte y la creatividad</li>
-                        <li>• Vuestros nodos lunares sugieren un vínculo kármico profundo</li>
-                        <li>• Compartís una visión similar sobre el crecimiento espiritual</li>
-                      </ul>
-                    </div>
-
-                    <Button className="w-full bg-cosmic-magenta hover:bg-cosmic-magenta/80 text-white">
-                      Enviar un Mensaje a {currentProfile.name}
-                    </Button>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
@@ -307,7 +148,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer CTA */}
       <footer className="py-16 px-4 bg-black/20">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4 text-cosmic-gold">¿Listo para alinear tus estrellas?</h2>

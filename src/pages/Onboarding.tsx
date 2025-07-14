@@ -47,12 +47,15 @@ const Onboarding = () => {
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
+        // Si no hay usuario, crear una cuenta temporal o redirigir al login
         toast({
-          title: "Error de autenticación",
-          description: "Debes iniciar sesión primero",
+          title: "Cuenta requerida",
+          description: "Necesitas crear una cuenta para continuar",
           variant: "destructive"
         });
-        navigate("/auth");
+        // Por ahora, guardamos en localStorage y navegamos
+        localStorage.setItem("onboardingData", JSON.stringify(formData));
+        navigate("/loading");
         return;
       }
 
@@ -80,7 +83,7 @@ const Onboarding = () => {
       }
 
       // Guardar también en localStorage para el loading
-      localStorage.setItem("userOnboardingData", JSON.stringify(formData));
+      localStorage.setItem("onboardingData", JSON.stringify(formData));
       
       // Navegar a la página de loading
       navigate("/loading");
